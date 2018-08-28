@@ -1,6 +1,7 @@
 import React from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import App from './App'
+// import Home from './pages/home'
 import Login from './pages/login'
 import Admin from './admin'
 import Buttons from './pages/ui/buttons'
@@ -12,6 +13,10 @@ import Tabs from './pages/ui/tabs'
 import Gallery from './pages/ui/gallery'
 import Carousel from './pages/ui/carousel'
 import NoMatch from './pages/nomatch'
+
+import FormLogin from './pages/form/login'
+import FormRegister from './pages/form/register'
+import BasicTable from './pages/table/basicTable'
 
 export default class IRouter extends React.Component {
 
@@ -31,6 +36,23 @@ export default class IRouter extends React.Component {
                                 <Route path="/ui/tabs" component={ Tabs }></Route>
                                 <Route path="/ui/gallery" component={ Gallery }></Route>
                                 <Route path="/ui/carousel" component={ Carousel }></Route>
+                                <Route component={ NoMatch }></Route>
+                            </Switch>
+                        </Admin>   
+                    }></Route>
+                    <Route path="/form" render={ () =>
+                        <Admin>
+                            <Switch>
+                                <Route path="/form/login" component={ FormLogin }></Route>
+                                <Route path="/form/reg" component={ FormRegister }></Route>
+                                <Route component={ NoMatch }></Route>
+                            </Switch>
+                        </Admin>   
+                    }></Route>
+                    <Route path="/table" render={ () =>
+                        <Admin>
+                            <Switch>
+                                <Route path="/table/basic" component={ BasicTable }></Route>
                                 <Route component={ NoMatch }></Route>
                             </Switch>
                         </Admin>   
