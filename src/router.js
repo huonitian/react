@@ -17,6 +17,8 @@ import NoMatch from './pages/nomatch'
 import FormLogin from './pages/form/login'
 import FormRegister from './pages/form/register'
 import BasicTable from './pages/table/basicTable'
+import HighTable from './pages/table/highTable'
+import City from './pages/city'
 
 export default class IRouter extends React.Component {
 
@@ -25,34 +27,22 @@ export default class IRouter extends React.Component {
             <HashRouter>
                 <App>
                     <Route path="/login" component={ Login }></Route>
-                    <Route path="/ui" render={ () =>
+                    <Route path="/admin" render={ () =>
                         <Admin>
                             <Switch>
-                                <Route path="/ui/buttons" component={ Buttons }></Route>
-                                <Route path="/ui/modals" component={ Modals }></Route>
-                                <Route path="/ui/loadings" component={ Loadings }></Route>
-                                <Route path="/ui/notification" component={ Notice }></Route>
-                                <Route path="/ui/messages" component={ Messages }></Route>
-                                <Route path="/ui/tabs" component={ Tabs }></Route>
-                                <Route path="/ui/gallery" component={ Gallery }></Route>
-                                <Route path="/ui/carousel" component={ Carousel }></Route>
-                                <Route component={ NoMatch }></Route>
-                            </Switch>
-                        </Admin>   
-                    }></Route>
-                    <Route path="/form" render={ () =>
-                        <Admin>
-                            <Switch>
-                                <Route path="/form/login" component={ FormLogin }></Route>
-                                <Route path="/form/reg" component={ FormRegister }></Route>
-                                <Route component={ NoMatch }></Route>
-                            </Switch>
-                        </Admin>   
-                    }></Route>
-                    <Route path="/table" render={ () =>
-                        <Admin>
-                            <Switch>
-                                <Route path="/table/basic" component={ BasicTable }></Route>
+                                <Route path="/admin/ui/buttons" component={ Buttons }></Route>
+                                <Route path="/admin/ui/modals" component={ Modals }></Route>
+                                <Route path="/admin/ui/loadings" component={ Loadings }></Route>
+                                <Route path="/admin/ui/notification" component={ Notice }></Route>
+                                <Route path="/admin/ui/messages" component={ Messages }></Route>
+                                <Route path="/admin/ui/tabs" component={ Tabs }></Route>
+                                <Route path="/admin/ui/gallery" component={ Gallery }></Route>
+                                <Route path="/admin/ui/carousel" component={ Carousel }></Route>
+                                <Route path="/admin/form/login" component={ FormLogin }></Route>
+                                <Route path="/admin/form/reg" component={ FormRegister }></Route>
+                                <Route path="/admin/table/basic" component={ BasicTable }></Route>
+                                <Route path="/admin/table/high" component={ HighTable }></Route>
+                                <Route path="/admin/city" component={ City }></Route>
                                 <Route component={ NoMatch }></Route>
                             </Switch>
                         </Admin>   
