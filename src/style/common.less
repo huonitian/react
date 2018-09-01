@@ -1,6 +1,16 @@
 @import './default.less';
 @import './loading.less';
-
+ul,ol{
+    list-style-type: none;
+}
+.clearfix {
+    &::after {
+        content: ' ';
+        clear: both;
+        display: block;
+        visibility: hidden;
+    }
+}
 .container {
     display: flex;
     .nav-left {
@@ -21,7 +31,7 @@
     }
 }
 
-.box-wrap {
+.box-wrap{
     background: @colorM;
     height: calc(75vh);
     display: flex;
