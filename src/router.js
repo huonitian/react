@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import App from './App'
-// import Home from './pages/home'
+import Home from './pages/home'
 import Login from './pages/login'
 import Admin from './admin'
 import Buttons from './pages/ui/buttons'
@@ -19,7 +19,9 @@ import FormRegister from './pages/form/register'
 import BasicTable from './pages/table/basicTable'
 import HighTable from './pages/table/highTable'
 import City from './pages/city'
-import Order from './pages/order/index'
+import Order from './pages/order'
+import User from './pages/user'
+import BikeMap from './pages/map/bikeMap'
 
 import Common from './common'
 import OrderDetail from './pages/order/detail'
@@ -34,6 +36,7 @@ export default class IRouter extends React.Component {
                     <Route path="/admin" render={ () =>
                         <Admin>
                             <Switch>
+                                <Route path="/admin/home" component={ Home }></Route>
                                 <Route path="/admin/ui/buttons" component={ Buttons }></Route>
                                 <Route path="/admin/ui/modals" component={ Modals }></Route>
                                 <Route path="/admin/ui/loadings" component={ Loadings }></Route>
@@ -48,6 +51,8 @@ export default class IRouter extends React.Component {
                                 <Route path="/admin/table/high" component={ HighTable }></Route>
                                 <Route path="/admin/city" component={ City }></Route>
                                 <Route path="/admin/order" component={ Order }></Route>
+                                <Route path="/admin/user" component={ User }></Route>
+                                <Route path="/admin/bikeMap" component={ BikeMap }></Route>
                                 <Route component={ NoMatch }></Route>
                             </Switch>
                         </Admin>   

@@ -32,6 +32,7 @@ export default class Detail extends React.Component {
 
     renderMap = (result) => {
         this.map = new window.BMap.Map("orderDetailMap");
+        this.map.enableScrollWheelZoom(true);
         // this.map.centerAndZoom('北京',12); 
         //调用添加地图控件方法
         this.addMapControl();
@@ -48,9 +49,8 @@ export default class Detail extends React.Component {
         map.addControl(new window.BMap.NavigationControl({anchor: window.BMAP_ANCHOR_TOP_RIGHT}));
     }
 
-    //调用路线图绘制方法
+    //路线图绘制
     drawBikeRoute = (positionlist) => {
-        let map = this.map;
         let startPoint = '';
         let endPoint = '';
         if (positionlist.length > 0) {
