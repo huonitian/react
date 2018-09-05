@@ -59,7 +59,7 @@ export default class Detail extends React.Component {
             startPoint = new window.BMap.Point(first.lon, first.lat);
             let startIcon = new window.BMap.Icon('/assets/start_point.png', new window.BMap.Size(36, 42),{
                 imageSize: new window.BMap.Size(36, 42),
-                anchor: new window.BMap.Size(36, 42)
+                anchor: new window.BMap.Size(18, 42)
             })
             let startMarker = new window.BMap.Marker(startPoint, {icon: startIcon});
             this.map.addOverlay(startMarker);
@@ -67,7 +67,7 @@ export default class Detail extends React.Component {
             endPoint = new window.BMap.Point(last.lon, last.lat);
             let endIcon = new window.BMap.Icon('/assets/end_point.png', new window.BMap.Size(36, 42),{
                 imageSize: new window.BMap.Size(36, 42),
-                anchor: new window.BMap.Size(36, 42)
+                anchor: new window.BMap.Size(18, 42)
             })
             let endMarker = new window.BMap.Marker(endPoint, {icon: endIcon});
             this.map.addOverlay(endMarker);

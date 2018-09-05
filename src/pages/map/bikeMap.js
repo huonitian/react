@@ -115,7 +115,7 @@ export default class BikeMap extends React.Component {
             <div>
                 <Card>
                     <div>共{ this.state.total_count }辆</div>
-                    <div id="contanier" style={{ height: 500 }}></div>
+                    <div id="contanier" style={{ height: 700 }}></div>
                 </Card>        
             </div>
         )
