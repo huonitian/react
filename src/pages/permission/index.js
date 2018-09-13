@@ -1,15 +1,18 @@
 import React from 'react'
-import { Card, Button, Table, Modal, Form, Input, Select } from 'antd'
+import { Card, Button, Table, Modal, Form, Input, Select, Tree } from 'antd'
 import Utils from './../../utils/utils'
 import axios from './../../axios'
+import data from './../../config/menuConfig'
 const FormItem = Form.Item;
 const Option = Select.Option;
+const TreeNode = Tree.TreeNode;
 
 export default class PermissionUser extends React.Component {
 
     state={
         dataSource: [],
-        isRoleVisible: false
+        isRoleVisible: false,
+        isPermVisible: false
     }
 
     componentWillMount () {
@@ -67,6 +70,26 @@ export default class PermissionUser extends React.Component {
         })
     }
 
+    // 打开权限设置弹框
+    handlePermission = () => {
+        let item = this.state.selectItem
+        if (!item) {
+            Modal.info({
+                title: '提示',
+                content: '请选择一个角色'
+            })
+            return
+        }
+        this.setState({
+            isPermVisible: true,
+            detailInfo: item
+        })
+    }
+
+    handlePermEditSubmit = () => {
+
+    }
+
     render () {
         const columns = [
             {
@@ -104,7 +127,7 @@ export default class PermissionUser extends React.Component {
             <div>
                 <Card>
                     <Button type="primary" onClick={ this.handleRole }>创建角色</Button>
-                    <Button type="primary" style={{ margin: '0 10px' }}>设置权限</Button>   
+                    <Button type="primary" style={{ margin: '0 10px' }} onClick={ this.handlePermission }>设置权限</Button>   
                     <Button type="primary">用户授权</Button>       
                 </Card>
                 <Card>
@@ -137,6 +160,21 @@ export default class PermissionUser extends React.Component {
                     }}
                 >
                     <RoleForm wrappedComponentRef={ (inst) => this.roleForm = inst }></RoleForm>
+                </Modal>
+                <Modal
+                    title="设置权限"
+                    visible={ this.state.isPermVisible }
+                    width={ 600 }
+                    onOk={ this.handlePermEditSubmit }
+                    onCancel={ () => {
+                        this.setState({
+                            isPermVisible: false   
+                        })
+                    }}
+                >
+                    <PermEditForm 
+                        detailInfo={ this.state.detailInfo }
+                    />   
                 </Modal>    
             </div>
         )
@@ -182,3 +220,56 @@ class RoleForm extends React.Component {
     }
 }
 RoleForm = Form.create()(RoleForm)
+
+class PermEditForm extends React.Component {
+
+    renderTreeNodes = (data) => {
+        data.map((item) => {
+            if (item.children) {
+                return <TreeNode title={ item.title } key={ item.key }>
+                    { this.renderTreeNodes(item.children) }
+                </TreeNode>
+            }
+        })
+    }
+
+    render () {
+        const { getFieldDecorator } = this.props.form
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 4 }
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 20 }
+            }
+        }
+        const detail_info = this.props.detailInfo
+        return (
+            <Form>
+                <FormItem label="角色名称" {...formItemLayout}>
+                    <Input disabled placeholder={ detail_info.role_name } />
+                </FormItem>
+                <FormItem label="状态" {...formItemLayout}>
+                    {
+                        getFieldDecorator('status',{
+                            initialValue: '1'
+                        })(
+                            <Select>
+                                <Option value="1">开启</Option>
+                                <Option value="2">禁用</Option>
+                            </Select>  
+                        )   
+                    }   
+                </FormItem>
+                <Tree>
+                    <TreeNode title="平台权限" key="platform_all">
+
+                    </TreeNode>
+                </Tree>
+            </Form>
+        )
+    }
+}
+PermEditForm = Form.create()(PermEditForm)
