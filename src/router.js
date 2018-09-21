@@ -1,5 +1,6 @@
 import React from 'react'
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter, Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import App from './App'
 import Home from './pages/home'
 import Login from './pages/login'
@@ -31,7 +32,7 @@ import Permission from './pages/permission'
 import Common from './common'
 import OrderDetail from './pages/order/detail'
 
-export default class IRouter extends React.Component {
+class IRouter extends React.Component {
 
     render () {
         return (
@@ -44,36 +45,40 @@ export default class IRouter extends React.Component {
                                 <Route path="/common/order/detail/:orderId" component={ OrderDetail }></Route>   
                             </Common>
                         }></Route>
-                        <Route path="/" render={ () =>
-                            <Admin>
-                                <Switch>
-                                    <Route path="/home" component={ Home }></Route>
-                                    <Route path="/ui/buttons" component={ Buttons }></Route>
-                                    <Route path="/ui/modals" component={ Modals }></Route>
-                                    <Route path="/ui/loadings" component={ Loadings }></Route>
-                                    <Route path="/ui/notification" component={ Notice }></Route>
-                                    <Route path="/ui/messages" component={ Messages }></Route>
-                                    <Route path="/ui/tabs" component={ Tabs }></Route>
-                                    <Route path="/ui/gallery" component={ Gallery }></Route>
-                                    <Route path="/ui/carousel" component={ Carousel }></Route>
-                                    <Route path="/form/login" component={ FormLogin }></Route>
-                                    <Route path="/form/reg" component={ FormRegister }></Route>
-                                    <Route path="/table/basic" component={ BasicTable }></Route>
-                                    <Route path="/table/high" component={ HighTable }></Route>
-                                    <Route path="/city" component={ City }></Route>
-                                    <Route path="/order" component={ Order }></Route>
-                                    <Route path="/user" component={ User }></Route>
-                                    <Route path="/bikeMap" component={ BikeMap }></Route>
-                                    <Route path="/charts/bar" component={ Bar }></Route>
-                                    <Route path="/charts/pie" component={ Pie }></Route>
-                                    <Route path="/charts/line" component={ Line }></Route>
-                                    <Route path="/rich" component={ Rich }></Route>
-                                    <Route path="/permission" component={ Permission }></Route>
-                                    <Redirect to="/home" />
-                                    <Route component={ NoMatch }></Route>
-                                </Switch>
-                            </Admin>   
-                        }></Route>
+                        <Route path="/" render={ () =>{
+                            if (this.props.userName) {
+                                return <Admin>
+                                            <Switch>
+                                                <Route path="/home" component={ Home }></Route>
+                                                <Route path="/ui/buttons" component={ Buttons }></Route>
+                                                <Route path="/ui/modals" component={ Modals }></Route>
+                                                <Route path="/ui/loadings" component={ Loadings }></Route>
+                                                <Route path="/ui/notification" component={ Notice }></Route>
+                                                <Route path="/ui/messages" component={ Messages }></Route>
+                                                <Route path="/ui/tabs" component={ Tabs }></Route>
+                                                <Route path="/ui/gallery" component={ Gallery }></Route>
+                                                <Route path="/ui/carousel" component={ Carousel }></Route>
+                                                <Route path="/form/login" component={ FormLogin }></Route>
+                                                <Route path="/form/reg" component={ FormRegister }></Route>
+                                                <Route path="/table/basic" component={ BasicTable }></Route>
+                                                <Route path="/table/high" component={ HighTable }></Route>
+                                                <Route path="/city" component={ City }></Route>
+                                                <Route path="/order" component={ Order }></Route>
+                                                <Route path="/user" component={ User }></Route>
+                                                <Route path="/bikeMap" component={ BikeMap }></Route>
+                                                <Route path="/charts/bar" component={ Bar }></Route>
+                                                <Route path="/charts/pie" component={ Pie }></Route>
+                                                <Route path="/charts/line" component={ Line }></Route>
+                                                <Route path="/rich" component={ Rich }></Route>
+                                                <Route path="/permission" component={ Permission }></Route>
+                                                <Redirect to="/home" />
+                                                <Route component={ NoMatch }></Route>
+                                            </Switch>
+                                        </Admin>
+                            } else {
+                                return <Redirect to="/login" />
+                            }
+                        }}></Route>
                     </Switch>
                 </App>
             </HashRouter>
@@ -81,3 +86,11 @@ export default class IRouter extends React.Component {
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+        menuName: state.menuName,
+        userName: state.userName
+    }
+}
+export default connect(mapStateToProps)(IRouter);

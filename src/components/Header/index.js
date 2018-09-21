@@ -4,14 +4,13 @@ import './index.less'
 import Util from '../../utils/utils'
 import axios from '../../axios'
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
+import { exitClear } from './../../redux/action'
 
 class Header extends React.Component {
     state = {}
 
     componentWillMount () {
-        this.setState({
-            userName: '河畔一角'
-        })
         setInterval(() => {
             let sysTime = Util.formateDate(new Date().getTime())
             this.setState({
@@ -38,6 +37,13 @@ class Header extends React.Component {
         })
     }
 
+    //退出登录
+    handleExit = () => {
+        const { dispatch } = this.props;
+        dispatch(exitClear())
+        this.props.history.push('/login')
+    }
+
     render () {
         const menuType = this.props.menuType
         return (
@@ -51,8 +57,8 @@ class Header extends React.Component {
                         </Col>:""
                     }
                     <Col span={ menuType?18:24 }>
-                        <span>欢迎，{ this.state.userName }</span>
-                        <a href="#">退出</a>
+                        <span>欢迎，{ this.props.userName }</span>
+                        <a href="javascript:;" onClick={ this.handleExit }>退出</a>
                     </Col>
                 </Row>
                 {
@@ -78,7 +84,8 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        menuName: state.menuName
+        menuName: state.menuName,
+        userName: state.userName
     }
 }
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(withRouter(Header));
