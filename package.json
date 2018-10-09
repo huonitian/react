@@ -104,6 +104,10 @@
     ]
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+        "no-script-url": 0,
+        "eqeqeq": 0
+    }
   }
 }

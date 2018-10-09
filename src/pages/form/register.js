@@ -196,7 +196,7 @@ class FormRegister extends React.Component {
                                     valuePropName: 'checked',
                                     initialValue: true
                                 })(
-                                    <Checkbox>我已阅读过<a href="#">协议</a> </Checkbox> 
+                                    <Checkbox>我已阅读过<a href="javascript:;">协议</a> </Checkbox> 
                                 )   
                             }  
                         </FormItem>
