@@ -2,6 +2,7 @@
   "name": "imoocmanager",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "antd": "^3.8.2",
     "autoprefixer": "7.1.6",

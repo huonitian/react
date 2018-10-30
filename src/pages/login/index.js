@@ -39,7 +39,7 @@ class Login extends React.Component {
         return (
             <div className="login">
                 <Row type="flex" justify="center" className="login_box">
-                    <Col span={5}>
+                    <Col span={6}>
                         <Card>
                             <Form>
                                 <FormItem>
